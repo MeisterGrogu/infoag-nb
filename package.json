@@ -1,0 +1,41 @@
+{
+  "name": "infoag-nb",
+  "displayName": "InfoAG-NB-is_Tuesday",
+  "description": "This package is only for members of the info-AG in Neubrandenburg!",
+  "version": "0.0.1",
+  "publisher": "LeopoldPython",
+  "repository": {},
+  "icon": "favicon.png",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "infoag-nb.is_Tuesday",
+        "title": "Ist heute AG?"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.45"
+  }
+}
