@@ -23,7 +23,19 @@
         "command": "snake-game.start",
         "title": "Play Snake"
       }
-    ]
+    ], 
+    "keybindings": [
+      {
+          "command": "infoag-nb.is_Tuesday",
+          "key": "ctrl+alt+t",
+          "mac": "cmd+alt+t"
+      },
+      {
+          "command": "snake-game.start",
+          "key": "ctrl+alt+s",
+          "mac": "cmd+alt+s"
+      }
+  ]
   },
   "scripts": {
     "lint": "eslint .",
@@ -40,6 +52,6 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.45"
+    "moment-timezone": "^0.5.45"  
   }
 }
