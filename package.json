@@ -1,11 +1,11 @@
 {
   "name": "infoag-nb",
-  "displayName": "InfoAG-NB-is_Tuesday",
+  "displayName": "InfoAG-NB",
   "description": "This package is only for members of the info-AG in Neubrandenburg!",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "LeopoldPython",
   "repository": {},
-  "icon": "favicon.png",
+  "icon": "pictures/favicon.png",
   "engines": {
     "vscode": "^1.89.0"
   },
@@ -18,6 +18,10 @@
       {
         "command": "infoag-nb.is_Tuesday",
         "title": "Ist heute AG?"
+      },
+      {
+        "command": "snake-game.start",
+        "title": "Play Snake"
       }
     ]
   },
