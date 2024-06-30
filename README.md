@@ -14,19 +14,18 @@ You can play Snake in Editor! (Yeah thats all)
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 0.0.1
 
-Initial release of infoAG-NB as infoAG-NB-is_Tuesday.
+- Initial release of infoAG-NB as infoAG-NB-is_Tuesday.
 
 ### 0.0.2
 
-Added Snake Game and Command.
+- Added Snake Game and Command.
 
 ### 0.0.3
 
-Snake game is more beatifulnow and i added keybinds.
+- made Snake game more beatiful and less glitchy
+- i added keybinds.
 
 ---
 
