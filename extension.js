@@ -1,5 +1,7 @@
 const vscode = require('vscode');
 const moment = require('moment-timezone');
+const fs = require('fs');
+const path = require('path');
 
 // Überprüft, ob heute Dienstag ist
 function isTuesday() {
@@ -95,170 +97,13 @@ function activate(context) {
             { enableScripts: true }
         );
 
-        panel.webview.html = getWebviewContent();
+        // Lade den Inhalt der snakeGame.html Datei
+        const snakeGamePath = path.join(context.extensionPath, 'snakeGame.html');
+        const snakeGameHtml = fs.readFileSync(snakeGamePath, 'utf8');
+        panel.webview.html = snakeGameHtml;
     });
 
     context.subscriptions.push(checkTuesdayCommand, startSnakeGameCommand);
-}
-
-// HTML-Inhalt für das Snake-Spiel
-function getWebviewContent() {
-    return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Snake Game</title>
-        <style>
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                background-color: #000;
-            }
-            canvas {
-                border: 1px solid #fff;
-            }
-            #gameOverScreen {
-                display: none;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: rgba(0, 0, 0, 0.8);
-                color: #fff;
-                padding: 20px;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
-        <div id="gameOverScreen">
-            <h2>Game Over</h2>
-            <p>Your score: <span id="score">0</span></p>
-            <button onclick="restartGame()">Restart</button>
-        </div>
-        <script>
-            const canvas = document.getElementById('gameCanvas');
-            const ctx = canvas.getContext('2d');
-            const gameOverScreen = document.getElementById('gameOverScreen');
-            const scoreDisplay = document.getElementById('score');
-
-            const box = 20;
-            let snake = [];
-            snake[0] = { x: 10 * box, y: 10 * box };
-            let direction = 'RIGHT';
-            let food = {
-                x: Math.floor(Math.random() * 19 + 1) * box,
-                y: Math.floor(Math.random() * 19 + 1) * box
-            };
-            let score = 0;
-            let game;
-
-            document.addEventListener('keydown', directionChange);
-
-            function directionChange(event) {
-                if (event.keyCode == 37 && direction != 'RIGHT') {
-                    direction = 'LEFT';
-                } else if (event.keyCode == 38 && direction != 'DOWN') {
-                    direction = 'UP';
-                } else if (event.keyCode == 39 && direction != 'LEFT') {
-                    direction = 'RIGHT';
-                } else if (event.keyCode == 40 && direction != 'UP') {
-                    direction = 'DOWN';
-                }else if (event.keyCode == 65 && direction != 'RIGHT') {
-                    direction = 'LEFT';
-                } else if (event.keyCode == 87 && direction != 'DOWN') {
-                    direction = 'UP';
-                } else if (event.keyCode == 68 && direction != 'LEFT') {
-                    direction = 'RIGHT';
-                } else if (event.keyCode == 83 && direction != 'UP') {
-                    direction = 'DOWN';
-                }
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, 400, 400);
-
-                for (let i = 0; i < snake.length; i++) {
-                    ctx.fillStyle = (i == 0) ? 'green' : 'white';
-                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                    ctx.strokeStyle = 'red';
-                    ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-                }
-
-                ctx.fillStyle = 'red';
-                ctx.fillRect(food.x, food.y, box, box);
-
-                let snakeX = snake[0].x;
-                let snakeY = snake[0].y;
-
-                if (direction == 'LEFT') snakeX -= box;
-                if (direction == 'UP') snakeY -= box;
-                if (direction == 'RIGHT') snakeX += box;
-                if (direction == 'DOWN') snakeY += box;
-
-                if (snakeX == food.x && snakeY == food.y) {
-                    food = {
-                        x: Math.floor(Math.random() * 19 + 1) * box,
-                        y: Math.floor(Math.random() * 19 + 1) * box
-                    };
-                    score++;
-                    scoreDisplay.textContent = score;
-                } else {
-                    snake.pop();
-                }
-
-                let newHead = { x: snakeX, y: snakeY };
-
-                if (snakeX < 0 || snakeY < 0 || snakeX >= 400 || snakeY >= 400 || collision(newHead, snake)) {
-                    showGameOverScreen();
-                    clearInterval(game);
-                }
-
-                snake.unshift(newHead);
-            }
-
-            function collision(head, array) {
-                for (let i = 0; i < array.length; i++) {
-                    if (head.x == array[i].x && head.y == array[i].y) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            function startGame() {
-                snake = [];
-                snake[0] = { x: 10 * box, y: 10 * box };
-                direction = 'RIGHT';
-                food = {
-                    x: Math.floor(Math.random() * 19 + 1) * box,
-                    y: Math.floor(Math.random() * 19 + 1) * box
-                };
-                score = 0;
-                scoreDisplay.textContent = score;
-                gameOverScreen.style.display = 'none';
-                game = setInterval(draw, 100);
-            }
-
-            function showGameOverScreen() {
-                gameOverScreen.style.display = 'block';
-            }
-
-            function restartGame() {
-                startGame();
-            }
-
-            startGame();
-        </script>
-    </body>
-    </html>
-    `;
 }
 
 // Deaktiviert die Erweiterung
