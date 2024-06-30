@@ -4,11 +4,9 @@ This extension is only for members of the Informatik AG at Data Experts Gmbh in 
 
 ## Features
 
-### Comands
-
-#### ist heute AG?
+### ist heute AG?
     Click Ctrl+Alt+T.
-#### play Snake
+### play Snake
     Click Ctrl+Alt+S.
 
 
