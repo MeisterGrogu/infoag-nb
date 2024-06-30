@@ -7,9 +7,9 @@ This extension is only for members of the Informatik AG at Data Experts Gmbh in 
 ### Comands
 
 #### ist heute AG?
-    Click Ctrl+Shift+P and click on (or type) 'ist heute AG?'.
+    Click Ctrl+Alt+T.
 #### play Snake
-    Click Ctrl+Shift+P and click on (or type) 'Play Snake'.
+    Click Ctrl+Alt+S.
 
 
 ## Release Notes
@@ -23,6 +23,10 @@ Initial release of infoAG-NB as infoAG-NB-is_Tuesday.
 ### 0.0.2
 
 Added Snake Game and Command.
+
+### 0.0.3
+
+Snake game is more beatifulnow and i added keybinds.
 
 ---
 
